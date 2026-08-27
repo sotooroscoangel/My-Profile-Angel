@@ -1,0 +1,177 @@
+.experience {
+  padding: 6rem 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--color-background);
+}
+
+.experience__header {
+  margin-bottom: 3rem;
+
+  text-align: center;
+}
+
+.experience__eyebrow {
+  color: var(--color-primary);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+
+  margin-bottom: 1.25rem;
+}
+
+.experience__title {
+  color: var(--color-text);
+
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  line-height: 1.05;
+
+  letter-spacing: -0.03em;
+
+  font-weight: 700;
+}
+
+.experience__list {
+  width: 100%;
+  max-width: 1000px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.experience__item {
+  display: grid;
+
+  grid-template-columns: 200px 1fr;
+
+  gap: 2.5rem;
+
+  padding: 2.25rem;
+
+  background-color: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.experience__date {
+  color: var(--color-primary);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+}
+
+.experience__content {
+  max-width: 700px;
+}
+
+.experience__content h3 {
+  color: var(--color-text);
+
+  font-size: 1.4rem;
+
+  margin-bottom: 0.4rem;
+}
+
+.experience__company {
+  color: var(--color-text-muted);
+
+  font-size: 0.85rem;
+
+  margin-bottom: 1rem;
+}
+
+.experience__description {
+  color: var(--color-text-secondary);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.experience__highlights {
+  margin-top: 1.25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.experience__highlights li {
+  position: relative;
+
+  padding-left: 1.25rem;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.experience__highlights li::before {
+  content: '';
+
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+
+  background-color: var(--color-primary);
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .experience {
+    padding: 5rem 2rem;
+  }
+
+  .experience__header {
+    margin-bottom: 2.5rem;
+  }
+
+  .experience__item {
+    grid-template-columns: 1fr;
+
+    gap: 1rem;
+
+    padding: 1.75rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .experience {
+    padding: 4rem 1.5rem;
+  }
+
+  .experience__eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .experience__item {
+    padding: 1.5rem;
+  }
+
+  .experience__content h3 {
+    font-size: 1.2rem;
+  }
+
+  .experience__description {
+    font-size: 0.88rem;
+  }
+
+  .experience__highlights li {
+    font-size: 0.82rem;
+  }
+}

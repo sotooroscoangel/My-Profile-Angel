@@ -1,21 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-  --color-primary: #3b82f6;
+  /* Primary accent — same blue family as before, tuned to sit on a
+     white background instead of near-black. */
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-muted: rgba(37, 99, 235, 0.08);
 
-  --color-background: #0a0a0a;
-  --color-surface: #111111;
-  --color-surface-2: #18181b;
-  --color-border: #27272a;
+  /* Light theme — white base with soft off-white surfaces and light
+     borders instead of the previous dark palette. */
+  --color-background: #ffffff;
+  --color-surface: #f6f7f9;
+  --color-surface-2: #eef0f3;
+  --color-border: #e4e4e7;
 
-  --color-text: #f4f4f5;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
+  --color-text: #18181b;
+  --color-text-secondary: #52525b;
+  --color-text-muted: #8b8b96;
 
-  font-family:
-    Inter,
+  /* Smaller, lighter navbar than before. */
+  --navbar-height: 64px;
+
+  --font-body:
+    "Inter",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+
+  --font-display:
+    "Space Grotesk",
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  font-family: var(--font-body);
 
   color: var(--color-text);
   background-color: var(--color-background);
@@ -37,5 +58,51 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
+
+  font-family: var(--font-body);
   background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Screen-reader-only content: visible to assistive tech, invisible
+   on screen. Used where a visual element (like the typewriter
+   animation) isn't a reliable text source for accessibility. */
+.visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  padding: 0;
+  margin: -1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+
+  border: 0;
+}
+
+/* Tablet / Mobile */
+
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -1,8 +1,25 @@
+import type { CSSProperties } from 'react'
+import { useTypewriter } from '../../hooks/useTypewriter'
+import heroPhoto from '../../assets/hero-photo.jpg'
 import './Hero.css'
 
+const ROLES = [
+  'Mechatronics Engineer',
+  'Volleyball Player',
+  'Guitarist',
+  'Novelist',
+  'Web Developer',
+]
+
 function Hero() {
+  const typedRole = useTypewriter(ROLES)
+
   return (
-    <section className="hero">
+    <section
+      id="hero"
+      className="hero"
+      style={{ '--hero-photo': `url(${heroPhoto})` } as CSSProperties}
+    >
       <div className="hero__content">
         <p className="hero__eyebrow">HELLO, I'M</p>
 
@@ -13,7 +30,16 @@ function Hero() {
         </h1>
 
         <p className="hero__role">
-          Mechatronics Engineer
+          I am a{' '}
+          <span className="hero__role-typed" aria-hidden="true">
+            {typedRole}
+            <span className="hero__role-cursor" aria-hidden="true" />
+          </span>
+          {/* Static list for screen readers / SEO, since the visible
+              text above changes character by character. */}
+          <span className="visually-hidden">
+            {ROLES.join(', ')}
+          </span>
         </p>
 
         <div className="hero__actions">

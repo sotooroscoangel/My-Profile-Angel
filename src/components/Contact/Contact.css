@@ -1,0 +1,155 @@
+.contact {
+  padding: 6rem 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-background);
+}
+
+.contact__content {
+  width: 100%;
+  max-width: 640px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.contact__eyebrow {
+  color: var(--color-primary);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+
+  margin-bottom: 1.25rem;
+}
+
+.contact__title {
+  color: var(--color-text);
+
+  font-size: clamp(2.75rem, 6vw, 5rem);
+
+  line-height: 1.05;
+
+  letter-spacing: -0.03em;
+
+  font-weight: 700;
+}
+
+.contact__description {
+  max-width: 460px;
+
+  color: var(--color-text-secondary);
+
+  font-size: 1.05rem;
+
+  line-height: 1.6;
+
+  margin-top: 1.5rem;
+}
+
+.contact__email {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  margin-top: 2rem;
+
+  padding: 0.9rem 1.75rem;
+
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  border-radius: 8px;
+
+  transition: background-color 0.2s ease;
+}
+
+.contact__email span {
+  transition: transform 0.2s ease;
+}
+
+.contact__email:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.contact__email:hover span {
+  transform: translate(3px, -3px);
+}
+
+.contact__secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  margin-top: 1.1rem;
+
+  color: var(--color-text-secondary);
+  text-decoration: none;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  transition: color 0.2s ease;
+}
+
+.contact__secondary span {
+  color: var(--color-primary);
+  transition: transform 0.2s ease;
+}
+
+.contact__secondary:hover {
+  color: var(--color-text);
+}
+
+.contact__secondary:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 5rem 2rem;
+  }
+
+  .contact__description {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 4rem 1.5rem;
+  }
+
+  .contact__eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .contact__description {
+    font-size: 0.9rem;
+  }
+
+  .contact__email {
+    width: 100%;
+    justify-content: center;
+
+    font-size: 0.9rem;
+  }
+}
