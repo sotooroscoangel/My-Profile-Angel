@@ -1,3 +1,29 @@
+:root {
+  --color-primary: #3b82f6;
+
+  --color-background: #0a0a0a;
+  --color-surface: #111111;
+  --color-surface-2: #18181b;
+  --color-border: #27272a;
+
+  --color-text: #f4f4f5;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,5 +35,7 @@ html {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-background);
 }

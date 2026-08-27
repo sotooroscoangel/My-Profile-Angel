@@ -1,9 +1,13 @@
+import Navbar from './components/Navbar/Navbar'
+import Hero from './components/Hero/Hero'
+import './App.css'
+
 function App() {
   return (
-    <main>
-      <h1>Ángel Gabriel Soto Orosco</h1>
-      <p>Ingeniero Mecatrónico</p>
-    </main>
+    <>
+      <Navbar />
+      <Hero />
+    </>
   )
 }
 
