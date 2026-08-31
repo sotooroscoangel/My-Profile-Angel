@@ -1,6 +1,9 @@
+import { useLanguage } from '../../i18n/LanguageContext'
 import './Footer.css'
 
 function Footer() {
+  const { t } = useLanguage()
+
   const scrollToTop = () => {
     document
       .getElementById('hero')
@@ -14,11 +17,11 @@ function Footer() {
       </p>
 
       <nav className="footer__links">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">{t.footer.links.about}</a>
+        <a href="#work">{t.footer.links.work}</a>
+        <a href="#experience">{t.footer.links.experience}</a>
+        <a href="#skills">{t.footer.links.skills}</a>
+        <a href="#contact">{t.footer.links.contact}</a>
       </nav>
 
       <button
@@ -26,7 +29,7 @@ function Footer() {
         className="footer__to-top"
         onClick={scrollToTop}
       >
-        Back to top
+        {t.footer.backToTop}
         <span className="footer__to-top-icon" aria-hidden="true" />
       </button>
     </footer>

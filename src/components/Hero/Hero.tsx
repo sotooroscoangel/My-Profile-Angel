@@ -1,18 +1,12 @@
 import type { CSSProperties } from 'react'
 import { useTypewriter } from '../../hooks/useTypewriter'
+import { useLanguage } from '../../i18n/LanguageContext'
 import heroPhoto from '../../assets/hero-photo.jpg'
 import './Hero.css'
 
-const ROLES = [
-  'Mechatronics Engineer',
-  'Volleyball Player',
-  'Guitarist',
-  'Novelist',
-  'Web Developer',
-]
-
 function Hero() {
-  const typedRole = useTypewriter(ROLES)
+  const { t } = useLanguage()
+  const typedRole = useTypewriter(t.hero.roles)
 
   return (
     <section
@@ -21,7 +15,7 @@ function Hero() {
       style={{ '--hero-photo': `url(${heroPhoto})` } as CSSProperties}
     >
       <div className="hero__content">
-        <p className="hero__eyebrow">HELLO, I'M</p>
+        <p className="hero__eyebrow">{t.hero.eyebrow}</p>
 
         <h1 className="hero__title">
           Ángel Gabriel
@@ -30,7 +24,7 @@ function Hero() {
         </h1>
 
         <p className="hero__role">
-          I am a{' '}
+          {t.hero.intro}{' '}
           <span className="hero__role-typed" aria-hidden="true">
             {typedRole}
             <span className="hero__role-cursor" aria-hidden="true" />
@@ -38,23 +32,23 @@ function Hero() {
           {/* Static list for screen readers / SEO, since the visible
               text above changes character by character. */}
           <span className="visually-hidden">
-            {ROLES.join(', ')}
+            {t.hero.roles.join(', ')}
           </span>
         </p>
 
         <div className="hero__actions">
           <a href="#work" className="hero__button hero__button--primary">
-            View my work
+            {t.hero.primaryButton}
           </a>
 
           <a href="#contact" className="hero__button hero__button--secondary">
-            Contact me
+            {t.hero.secondaryButton}
           </a>
         </div>
       </div>
 
       <div className="hero__scroll">
-        <span>SCROLL</span>
+        <span>{t.hero.scroll}</span>
         <span className="hero__scroll-arrow">↓</span>
       </div>
     </section>

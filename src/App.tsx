@@ -1,10 +1,14 @@
 import { useState } from 'react'
+import { LanguageProvider } from './i18n/LanguageContext'
 import Navbar from './components/Navbar/Navbar'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
+import Education from './components/Education/Education'
+import Achievements from './components/Achievements/Achievements'
 import Projects from './components/Projects/Projects'
 import Experience from './components/Experience/Experience'
 import Skills from './components/Skills/Skills'
+import Beyond from './components/Beyond/Beyond'
 import Contact from './components/Contact/Contact'
 import Footer from './components/Footer/Footer'
 
@@ -16,12 +20,16 @@ function App() {
   const [openProject, setOpenProject] = useState<string | null>(null)
 
   return (
-    <>
+    <LanguageProvider>
       <Navbar onNavigate={() => setOpenProject(null)} />
 
       <Hero />
 
       <About />
+
+      <Education />
+
+      <Achievements />
 
       <Projects
         openProject={openProject}
@@ -32,10 +40,12 @@ function App() {
 
       <Skills />
 
+      <Beyond />
+
       <Contact />
 
       <Footer />
-    </>
+    </LanguageProvider>
   )
 }
 

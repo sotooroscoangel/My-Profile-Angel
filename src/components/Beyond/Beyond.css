@@ -1,0 +1,68 @@
+.beyond {
+  padding: 6rem 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-background);
+}
+
+.beyond__content {
+  width: 100%;
+  max-width: 640px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.beyond__eyebrow {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.25rem;
+}
+
+.beyond__title {
+  color: var(--color-text);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+
+  margin-bottom: 1.5rem;
+}
+
+.beyond__description {
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* Tablet */
+
+@media (max-width: 768px) {
+  .beyond {
+    padding: 5rem 2rem;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .beyond {
+    padding: 4rem 1.5rem;
+  }
+
+  .beyond__eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .beyond__description {
+    font-size: 0.92rem;
+  }
+}

@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { projects } from '../../data/projects'
+import { useLanguage } from '../../i18n/LanguageContext'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import './Projects.css'
 
 interface ProjectsProps {
@@ -8,8 +10,12 @@ interface ProjectsProps {
 }
 
 function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
+  const { t } = useLanguage()
+  const { ref, isVisible } = useScrollReveal<HTMLElement>()
+
   const activeIndex = projects.findIndex((project) => project.id === openProject)
   const activeProject = activeIndex >= 0 ? projects[activeIndex] : null
+  const activeText = activeProject ? t.projects.items[activeProject.id] : null
 
   const goToProject = (direction: 1 | -1) => {
     if (activeIndex < 0) return
@@ -41,45 +47,43 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
   }, [activeProject])
 
   return (
-    <section id="work" className="projects">
+    <section
+      id="work"
+      ref={ref}
+      className={`projects reveal ${isVisible ? 'reveal--visible' : ''}`}
+    >
       <div className="projects__header">
-        <p className="projects__eyebrow">02 / WORK</p>
+        <p className="projects__eyebrow">{t.projects.eyebrow}</p>
 
-        <h2 className="projects__title">
-          Selected Projects
-        </h2>
+        <h2 className="projects__title">{t.projects.title}</h2>
       </div>
 
       <div className="projects__grid">
-        {projects.map((project) => (
-          <button
-            key={project.id}
-            type="button"
-            className="project-card"
-            onClick={() => onOpenProjectChange(project.id)}
-          >
-            <div className="project-card__preview">
-              <span>PROJECT PREVIEW</span>
-            </div>
+        {projects.map((project) => {
+          const text = t.projects.items[project.id]
 
-            <div className="project-card__body">
-              <span className="project-card__category">
-                {project.category}
-              </span>
+          return (
+            <button
+              key={project.id}
+              type="button"
+              className="project-card"
+              onClick={() => onOpenProjectChange(project.id)}
+            >
+              <div className="project-card__preview">
+                <span>{t.projects.previewLabel}</span>
+              </div>
 
-              <h3 className="project-card__title">
-                {project.title}
-              </h3>
-
-              <span className="project-card__year">
-                {project.year}
-              </span>
-            </div>
-          </button>
-        ))}
+              <div className="project-card__body">
+                <span className="project-card__category">{text.category}</span>
+                <h3 className="project-card__title">{text.title}</h3>
+                <span className="project-card__year">{project.year}</span>
+              </div>
+            </button>
+          )
+        })}
       </div>
 
-      {activeProject && (
+      {activeProject && activeText && (
         <div
           className="project-modal-overlay"
           onClick={() => onOpenProjectChange(null)}
@@ -89,9 +93,7 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="project-modal__header">
-              <span className="project-modal__category">
-                {activeProject.category}
-              </span>
+              <span className="project-modal__category">{activeText.category}</span>
 
               <div className="project-modal__header-right">
                 <span className="project-modal__counter">
@@ -109,26 +111,20 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
               </div>
             </div>
 
-            <h3 className="project-modal__title">
-              {activeProject.title}
-            </h3>
+            <h3 className="project-modal__title">{activeText.title}</h3>
 
-            <p className="project-modal__date">
-              {activeProject.year}
-            </p>
+            <p className="project-modal__date">{activeProject.year}</p>
 
-            <p className="project-modal__description">
-              {activeProject.description}
-            </p>
+            <p className="project-modal__description">{activeText.description}</p>
 
             <div className="project-modal__preview">
-              <span>PROJECT PREVIEW</span>
+              <span>{t.projects.previewLabel}</span>
             </div>
 
-            <p className="project-modal__label">HIGHLIGHTS</p>
+            <p className="project-modal__label">{t.projects.highlightsLabel}</p>
 
             <div className="project-modal__highlights">
-              {activeProject.highlights.map((highlight, index) => (
+              {activeText.highlights.map((highlight, index) => (
                 <div key={highlight} className="project-modal__highlight">
                   <span className="project-modal__highlight-number">
                     {index + 1}

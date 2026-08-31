@@ -1,23 +1,30 @@
+import { useLanguage } from '../../i18n/LanguageContext'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 import './Contact.css'
 
 function Contact() {
+  const { t } = useLanguage()
+  const { ref, isVisible } = useScrollReveal<HTMLElement>()
+
   return (
-    <section id="contact" className="contact">
+    <section
+      id="contact"
+      ref={ref}
+      className={`contact reveal ${isVisible ? 'reveal--visible' : ''}`}
+    >
       <div className="contact__content">
-        <p className="contact__eyebrow">
-          05 / CONTACT
-        </p>
+        <p className="contact__eyebrow">{t.contact.eyebrow}</p>
 
         <h2 className="contact__title">
-          Let's work
-          <br />
-          together.
+          {t.contact.title.map((line, index) => (
+            <span key={line}>
+              {line}
+              {index < t.contact.title.length - 1 && <br />}
+            </span>
+          ))}
         </h2>
 
-        <p className="contact__description">
-          Interested in working together or learning more
-          about my work? Get in touch.
-        </p>
+        <p className="contact__description">{t.contact.description}</p>
 
         <a
           href="mailto:sotooroscoangel@gmail.com"
@@ -33,7 +40,7 @@ function Contact() {
           rel="noreferrer"
           className="contact__secondary"
         >
-          LinkedIn
+          {t.contact.linkedinLabel}
           <span>↗</span>
         </a>
       </div>
