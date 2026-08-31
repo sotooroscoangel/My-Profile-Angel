@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { projects } from '../../data/projects'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
@@ -47,121 +48,134 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
   }, [activeProject])
 
   return (
-    <section
-      id="work"
-      ref={ref}
-      className={`projects reveal ${isVisible ? 'reveal--visible' : ''}`}
-    >
-      <div className="projects__header">
-        <p className="projects__eyebrow">{t.projects.eyebrow}</p>
+    <>
+      <section
+        id="work"
+        ref={ref}
+        className={`projects reveal ${isVisible ? 'reveal--visible' : ''}`}
+      >
+        <div className="projects__header">
+          <p className="projects__eyebrow">{t.projects.eyebrow}</p>
 
-        <h2 className="projects__title">{t.projects.title}</h2>
-      </div>
+          <h2 className="projects__title">{t.projects.title}</h2>
+        </div>
 
-      <div className="projects__grid">
-        {projects.map((project) => {
-          const text = t.projects.items[project.id]
+        <div className="projects__grid">
+          {projects.map((project) => {
+            const text = t.projects.items[project.id]
 
-          return (
-            <button
-              key={project.id}
-              type="button"
-              className="project-card"
-              onClick={() => onOpenProjectChange(project.id)}
+            return (
+              <button
+                key={project.id}
+                type="button"
+                className="project-card"
+                onClick={() => onOpenProjectChange(project.id)}
+              >
+                <div className="project-card__preview">
+                  <span>{t.projects.previewLabel}</span>
+                </div>
+
+                <div className="project-card__body">
+                  <span className="project-card__category">{text.category}</span>
+                  <h3 className="project-card__title">{text.title}</h3>
+                  <span className="project-card__year">{project.year}</span>
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* Rendered via a portal straight to <body>, OUTSIDE the section
+          above. That section carries the scroll-reveal entrance
+          animation (a `transform`), and any `transform` on an
+          ancestor — even `translateY(0)` — creates a new containing
+          block for `position: fixed` descendants. Left inside, the
+          "fixed" modal would anchor to that section instead of the
+          real viewport, breaking its positioning and scroll framing
+          exactly as reported. The portal sidesteps that entirely. */}
+      {activeProject &&
+        activeText &&
+        createPortal(
+          <div
+            className="project-modal-overlay"
+            onClick={() => onOpenProjectChange(null)}
+          >
+            <div
+              className="project-modal"
+              onClick={(event) => event.stopPropagation()}
             >
-              <div className="project-card__preview">
+              <div className="project-modal__header">
+                <span className="project-modal__category">{activeText.category}</span>
+
+                <div className="project-modal__header-right">
+                  <span className="project-modal__counter">
+                    {activeIndex + 1} / {projects.length}
+                  </span>
+
+                  <button
+                    type="button"
+                    className="project-modal__close"
+                    onClick={() => onOpenProjectChange(null)}
+                    aria-label="Close"
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+
+              <h3 className="project-modal__title">{activeText.title}</h3>
+
+              <p className="project-modal__date">{activeProject.year}</p>
+
+              <p className="project-modal__description">{activeText.description}</p>
+
+              <div className="project-modal__preview">
                 <span>{t.projects.previewLabel}</span>
               </div>
 
-              <div className="project-card__body">
-                <span className="project-card__category">{text.category}</span>
-                <h3 className="project-card__title">{text.title}</h3>
-                <span className="project-card__year">{project.year}</span>
+              <p className="project-modal__label">{t.projects.highlightsLabel}</p>
+
+              <div className="project-modal__highlights">
+                {activeText.highlights.map((highlight, index) => (
+                  <div key={highlight} className="project-modal__highlight">
+                    <span className="project-modal__highlight-number">
+                      {index + 1}
+                    </span>
+                    <p>{highlight}</p>
+                  </div>
+                ))}
               </div>
-            </button>
-          )
-        })}
-      </div>
 
-      {activeProject && activeText && (
-        <div
-          className="project-modal-overlay"
-          onClick={() => onOpenProjectChange(null)}
-        >
-          <div
-            className="project-modal"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="project-modal__header">
-              <span className="project-modal__category">{activeText.category}</span>
-
-              <div className="project-modal__header-right">
-                <span className="project-modal__counter">
-                  {activeIndex + 1} / {projects.length}
-                </span>
-
-                <button
-                  type="button"
-                  className="project-modal__close"
-                  onClick={() => onOpenProjectChange(null)}
-                  aria-label="Close"
-                >
-                  ×
-                </button>
+              <div className="project-modal__technologies">
+                {activeProject.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
               </div>
-            </div>
 
-            <h3 className="project-modal__title">{activeText.title}</h3>
-
-            <p className="project-modal__date">{activeProject.year}</p>
-
-            <p className="project-modal__description">{activeText.description}</p>
-
-            <div className="project-modal__preview">
-              <span>{t.projects.previewLabel}</span>
-            </div>
-
-            <p className="project-modal__label">{t.projects.highlightsLabel}</p>
-
-            <div className="project-modal__highlights">
-              {activeText.highlights.map((highlight, index) => (
-                <div key={highlight} className="project-modal__highlight">
-                  <span className="project-modal__highlight-number">
-                    {index + 1}
-                  </span>
-                  <p>{highlight}</p>
+              {projects.length > 1 && (
+                <div className="project-modal__nav">
+                  <button
+                    type="button"
+                    onClick={() => goToProject(-1)}
+                    aria-label="Previous project"
+                  >
+                    ←
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goToProject(1)}
+                    aria-label="Next project"
+                  >
+                    →
+                  </button>
                 </div>
-              ))}
+              )}
             </div>
-
-            <div className="project-modal__technologies">
-              {activeProject.technologies.map((technology) => (
-                <span key={technology}>{technology}</span>
-              ))}
-            </div>
-
-            {projects.length > 1 && (
-              <div className="project-modal__nav">
-                <button
-                  type="button"
-                  onClick={() => goToProject(-1)}
-                  aria-label="Previous project"
-                >
-                  ←
-                </button>
-                <button
-                  type="button"
-                  onClick={() => goToProject(1)}
-                  aria-label="Next project"
-                >
-                  →
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </section>
+          </div>,
+          document.body
+        )}
+    </>
   )
 }
 

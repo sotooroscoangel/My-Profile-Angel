@@ -92,6 +92,7 @@ export interface Translation {
     eyebrow: string
     title: string[]
     groups: SkillGroup[]
+    brandsLabel: string
   }
   beyond: {
     eyebrow: string
@@ -300,6 +301,7 @@ export const translations: Record<Language, Translation> = {
           ],
         },
       ],
+      brandsLabel: 'Equipment & Brands',
     },
     beyond: {
       eyebrow: '08 / BEYOND ENGINEERING',
@@ -508,6 +510,7 @@ export const translations: Record<Language, Translation> = {
           ],
         },
       ],
+      brandsLabel: 'Equipos y Marcas',
     },
     beyond: {
       eyebrow: '08 / MÁS ALLÁ DE LA INGENIERÍA',

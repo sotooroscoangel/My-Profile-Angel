@@ -91,11 +91,110 @@
   border-bottom: none;
 }
 
+/* =========================
+   BRAND / EQUIPMENT WALL
+   Wordmark cards instead of official logos (those are trademarked —
+   this keeps the "brand wall" look without reproducing any real
+   logo graphics).
+========================= */
+
+.skills__brands {
+  width: 100%;
+  max-width: 1200px;
+
+  margin-top: 3rem;
+  padding-top: 3rem;
+
+  border-top: 1px solid var(--color-border);
+
+  text-align: center;
+}
+
+.skills__brands-label {
+  color: var(--color-text-muted);
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  margin-bottom: 1.75rem;
+}
+
+.skills__brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+  gap: 1rem;
+}
+
+.brand-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 90px;
+
+  padding: 1.25rem;
+
+  background-color: var(--color-background);
+
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.brand-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 20px -12px rgba(24, 24, 27, 0.15);
+}
+
+.brand-card__logo {
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+
+  /* Real logos come in as full color; a light grayscale-by-default,
+     full color on hover treatment reads as a clean, unified "brand
+     wall" instead of a noisy mix of clashing logo colors. Drop this
+     rule if you'd rather show them in color all the time. */
+  filter: grayscale(1) opacity(0.7);
+  transition: filter 0.2s ease;
+}
+
+.brand-card:hover .brand-card__logo {
+  filter: grayscale(0) opacity(1);
+}
+
+.brand-card__name {
+  font-family: var(--font-display);
+  color: var(--color-text-secondary);
+
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-align: center;
+
+  transition: color 0.2s ease;
+}
+
+.brand-card:hover .brand-card__name {
+  color: var(--color-primary);
+}
+
 /* Tablet */
 
 @media (max-width: 1024px) {
   .skills__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills__brands-grid {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 }
 
@@ -122,6 +221,23 @@
 
   .skills__grid {
     grid-template-columns: 1fr;
+  }
+
+  .skills__brands {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .skills__brands-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  }
+
+  .brand-card {
+    height: 72px;
+  }
+
+  .brand-card__name {
+    font-size: 0.85rem;
   }
 
   .skills__group {
