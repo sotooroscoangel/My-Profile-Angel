@@ -1,5 +1,7 @@
+import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { smoothScrollTo } from '../../utils/smoothScroll'
 import './Navbar.css'
 
 interface NavbarProps {
@@ -12,34 +14,55 @@ function Navbar({ onNavigate }: NavbarProps) {
   const { language, toggleLanguage, t } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    event.preventDefault()
+
     setIsMenuOpen(false)
     onNavigate?.()
+
+    smoothScrollTo(targetId)
+    window.history.pushState(null, '', `#${targetId}`)
   }
 
   return (
     <nav className="navbar">
-      <a href="#hero" className="navbar__logo" onClick={handleLinkClick}>
+      <a
+        href="#hero"
+        className="navbar__logo"
+        onClick={(event) => handleLinkClick(event, 'hero')}
+      >
         AGS
       </a>
 
       <div className={`navbar__links ${isMenuOpen ? 'navbar__links--open' : ''}`}>
-        <a href="#about" onClick={handleLinkClick}>
+        <a href="#about" onClick={(event) => handleLinkClick(event, 'about')}>
           {t.nav.about}
         </a>
-        <a href="#education" onClick={handleLinkClick}>
+        <a
+          href="#education"
+          onClick={(event) => handleLinkClick(event, 'education')}
+        >
           {t.nav.education}
         </a>
-        <a href="#work" onClick={handleLinkClick}>
+        <a href="#work" onClick={(event) => handleLinkClick(event, 'work')}>
           {t.nav.work}
         </a>
-        <a href="#experience" onClick={handleLinkClick}>
+        <a
+          href="#experience"
+          onClick={(event) => handleLinkClick(event, 'experience')}
+        >
           {t.nav.experience}
         </a>
-        <a href="#skills" onClick={handleLinkClick}>
+        <a href="#skills" onClick={(event) => handleLinkClick(event, 'skills')}>
           {t.nav.skills}
         </a>
-        <a href="#contact" onClick={handleLinkClick}>
+        <a
+          href="#contact"
+          onClick={(event) => handleLinkClick(event, 'contact')}
+        >
           {t.nav.contact}
         </a>
 

@@ -51,10 +51,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   min-width: 320px;
   min-height: 100vh;
@@ -98,12 +94,6 @@ h3 {
 @media (max-width: 768px) {
   :root {
     --navbar-height: 56px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }
 
