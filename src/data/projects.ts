@@ -25,7 +25,7 @@ export const projects: Project[] = [
   {
     id: 'cemi-conveyor-safety',
     number: '03',
-    year: '2025',
+    year: '2026',
     technologies: ['SEW-Eurodrive Motors & VFDs', 'Keyence GS-M Safety Sensors', 'Compact GuardLogix 5380', 'Cable Routing & Sizing'],
   },
 ]
