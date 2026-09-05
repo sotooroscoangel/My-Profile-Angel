@@ -1,5 +1,7 @@
+import type { CSSProperties } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
+import tecPhoto from '../../assets/tec-monterrey.webp'
 import './Education.css'
 
 function Education() {
@@ -11,6 +13,7 @@ function Education() {
       id="education"
       ref={ref}
       className={`education reveal ${isVisible ? 'reveal--visible' : ''}`}
+      style={{ '--education-photo': `url(${tecPhoto})` } as CSSProperties}
     >
       <div className="education__header">
         <p className="education__eyebrow">{t.education.eyebrow}</p>

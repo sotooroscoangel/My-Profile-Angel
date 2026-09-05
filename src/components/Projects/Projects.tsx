@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { projects } from '../../data/projects'
 import { useLanguage } from '../../i18n/LanguageContext'
@@ -13,16 +13,31 @@ interface ProjectsProps {
 function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
   const { t } = useLanguage()
   const { ref, isVisible } = useScrollReveal<HTMLElement>()
+  const [imageIndex, setImageIndex] = useState(0)
 
   const activeIndex = projects.findIndex((project) => project.id === openProject)
   const activeProject = activeIndex >= 0 ? projects[activeIndex] : null
   const activeText = activeProject ? t.projects.items[activeProject.id] : null
+  const activeImages = activeProject?.images ?? []
 
   const goToProject = (direction: 1 | -1) => {
     if (activeIndex < 0) return
     const nextIndex = (activeIndex + direction + projects.length) % projects.length
     onOpenProjectChange(projects[nextIndex].id)
   }
+
+  const goToImage = (direction: 1 | -1) => {
+    if (activeImages.length === 0) return
+    setImageIndex(
+      (current) => (current + direction + activeImages.length) % activeImages.length
+    )
+  }
+
+  // Always start a freshly-opened (or switched-to) project on its
+  // first photo.
+  useEffect(() => {
+    setImageIndex(0)
+  }, [openProject])
 
   // Lock page scroll while the modal is open, and support Escape /
   // arrow-key navigation between projects.
@@ -72,7 +87,16 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
                 onClick={() => onOpenProjectChange(project.id)}
               >
                 <div className="project-card__preview">
-                  <span>{t.projects.previewLabel}</span>
+                  {project.images?.[0] ? (
+                    <img
+                      src={project.images[0]}
+                      alt={text.title}
+                      className="project-card__image"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span>{t.projects.previewLabel}</span>
+                  )}
                 </div>
 
                 <div className="project-card__body">
@@ -131,7 +155,54 @@ function Projects({ openProject, onOpenProjectChange }: ProjectsProps) {
               <p className="project-modal__description">{activeText.description}</p>
 
               <div className="project-modal__preview">
-                <span>{t.projects.previewLabel}</span>
+                {activeImages.length > 0 ? (
+                  <>
+                    <img
+                      src={activeImages[imageIndex]}
+                      alt={`${activeText.title} — ${imageIndex + 1}/${activeImages.length}`}
+                      className="project-modal__image"
+                    />
+
+                    {activeImages.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          className="project-modal__image-nav project-modal__image-nav--prev"
+                          onClick={() => goToImage(-1)}
+                          aria-label="Previous photo"
+                        >
+                          ←
+                        </button>
+                        <button
+                          type="button"
+                          className="project-modal__image-nav project-modal__image-nav--next"
+                          onClick={() => goToImage(1)}
+                          aria-label="Next photo"
+                        >
+                          →
+                        </button>
+
+                        <div className="project-modal__image-dots">
+                          {activeImages.map((image, index) => (
+                            <button
+                              key={image}
+                              type="button"
+                              className={`project-modal__image-dot ${
+                                index === imageIndex
+                                  ? 'project-modal__image-dot--active'
+                                  : ''
+                              }`}
+                              onClick={() => setImageIndex(index)}
+                              aria-label={`Go to photo ${index + 1}`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <span>{t.projects.previewLabel}</span>
+                )}
               </div>
 
               <p className="project-modal__label">{t.projects.highlightsLabel}</p>
