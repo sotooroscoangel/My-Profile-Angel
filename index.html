@@ -104,7 +104,62 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Fallback content for crawlers/tools that don't execute
+           JavaScript (this is exactly what was missing per the SEO
+           review — React replaces all of this the instant it mounts,
+           so real visitors never see it). Keep this in sync with the
+           real page content if it changes meaningfully. -->
+      <main style="max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; color: #18181b; line-height: 1.6;">
+        <h1 style="font-size: 2rem; margin-bottom: 0.25rem;">Ángel Gabriel Soto Orosco</h1>
+        <p style="color: #52525b; font-weight: 600; margin-bottom: 1.5rem;">
+          Mechatronics Engineer | Industrial Automation &amp; Field Engineering
+        </p>
+
+        <p>
+          I'm Ángel Gabriel Soto Orosco, a Mechatronics Engineer from Tecnológico de Monterrey,
+          Campus Toluca, based in Mexico. I work in industrial automation, electrical systems, PLC
+          programming, instrumentation, and field engineering — currently as an Automation Engineer
+          at CEMI Automation.
+        </p>
+
+        <h2>Specialization</h2>
+        <ul>
+          <li>Industrial Automation</li>
+          <li>PLC Programming (Allen-Bradley, Siemens, Mitsubishi, Omron)</li>
+          <li>Electrical Systems &amp; Instrumentation</li>
+          <li>Industrial Safety Systems</li>
+          <li>CAD / CAE (Siemens NX, ANSYS, SolidWorks)</li>
+          <li>Field Engineering</li>
+        </ul>
+
+        <h2>Education</h2>
+        <p>
+          Bachelor of Engineering, Mechatronics — Automotive Engineering Concentration,
+          Tecnológico de Monterrey, Campus Toluca (2021–2025).
+        </p>
+
+        <h2>Experience</h2>
+        <p>
+          Automation Engineer, CEMI Automation (Feb 2025 – Present) — industrial automation and
+          electrical field engineering for machinery and power systems in the food industry.
+        </p>
+
+        <h2>Projects</h2>
+        <ul>
+          <li>Formula SAE — Electrical Subsystem (Tecnológico de Monterrey)</li>
+          <li>Hunucmá Rotary Kiln — Manufacturing Lead</li>
+          <li>Palletizing Conveyor Lines — Unilever (Knorr)</li>
+        </ul>
+
+        <h2>Contact</h2>
+        <p>
+          <a href="mailto:sotooroscoangel@gmail.com">sotooroscoangel@gmail.com</a>
+          &nbsp;·&nbsp;
+          <a href="https://www.linkedin.com/in/angelgabrielsoto">LinkedIn — Ángel Gabriel Soto Orosco</a>
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
