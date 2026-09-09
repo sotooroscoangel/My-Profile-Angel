@@ -47,6 +47,13 @@ export interface Translation {
     contact: string
     resume: string
   }
+  resumeModal: {
+    title: string
+    loading: string
+    download: string
+    openNewTab: string
+    close: string
+  }
   hero: {
     eyebrow: string
     intro: string
@@ -81,6 +88,8 @@ export interface Translation {
     title: string
     previewLabel: string
     highlightsLabel: string
+    photosTab: string
+    videosTab: string
     items: Record<string, ProjectText>
   }
   experience: {
@@ -132,6 +141,13 @@ export const translations: Record<Language, Translation> = {
       skills: 'Skills',
       contact: 'Contact',
       resume: 'Resume',
+    },
+    resumeModal: {
+      title: 'Resume',
+      loading: 'Loading resume…',
+      download: 'Download PDF',
+      openNewTab: 'Open in new tab',
+      close: 'Close',
     },
     hero: {
       eyebrow: "HELLO, I'M",
@@ -194,6 +210,8 @@ export const translations: Record<Language, Translation> = {
       title: 'Selected Projects',
       previewLabel: 'PROJECT PREVIEW',
       highlightsLabel: 'HIGHLIGHTS',
+      photosTab: 'Photos',
+      videosTab: 'Videos',
       items: {
         'formula-sae': {
           category: 'Automotive Engineering',
@@ -344,6 +362,13 @@ export const translations: Record<Language, Translation> = {
       contact: 'Contacto',
       resume: 'CV',
     },
+    resumeModal: {
+      title: 'CV',
+      loading: 'Cargando CV…',
+      download: 'Descargar PDF',
+      openNewTab: 'Abrir en pestaña nueva',
+      close: 'Cerrar',
+    },
     hero: {
       eyebrow: 'HOLA, SOY',
       intro: 'Soy',
@@ -405,6 +430,8 @@ export const translations: Record<Language, Translation> = {
       title: 'Proyectos Seleccionados',
       previewLabel: 'VISTA PREVIA',
       highlightsLabel: 'DESTACADOS',
+      photosTab: 'Fotos',
+      videosTab: 'Videos',
       items: {
         'formula-sae': {
           category: 'Ingeniería Automotriz',

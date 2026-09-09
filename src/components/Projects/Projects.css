@@ -280,6 +280,46 @@
   margin-bottom: 1.75rem;
 }
 
+.project-modal__media-tabs {
+  display: flex;
+  gap: 0.5rem;
+
+  margin-bottom: 0.75rem;
+}
+
+.project-modal__media-tab {
+  padding: 0.4rem 0.9rem;
+
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+
+  color: var(--color-text-secondary);
+  cursor: pointer;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.project-modal__media-tab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.project-modal__media-tab--active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.project-modal__video {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .project-modal__preview {
   position: relative;
 

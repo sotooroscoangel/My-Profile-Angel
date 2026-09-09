@@ -2,6 +2,7 @@ import type { MouseEvent } from 'react'
 import { useState } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { smoothScrollTo } from '../../utils/smoothScroll'
+import ResumeModal from '../ResumeModal/ResumeModal'
 import './Navbar.css'
 
 interface NavbarProps {
@@ -13,6 +14,7 @@ interface NavbarProps {
 function Navbar({ onNavigate }: NavbarProps) {
   const { language, toggleLanguage, t } = useLanguage()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isResumeOpen, setIsResumeOpen] = useState(false)
 
   const handleLinkClick = (
     event: MouseEvent<HTMLAnchorElement>,
@@ -66,14 +68,16 @@ function Navbar({ onNavigate }: NavbarProps) {
           {t.nav.contact}
         </a>
 
-        <a
-          href="/resume.pdf"
-          download="Angel-Soto-Orosco-Resume.pdf"
+        <button
+          type="button"
           className="navbar__resume"
-          onClick={() => setIsMenuOpen(false)}
+          onClick={() => {
+            setIsMenuOpen(false)
+            setIsResumeOpen(true)
+          }}
         >
           {t.nav.resume}
-        </a>
+        </button>
       </div>
 
       <div className="navbar__actions">
@@ -97,6 +101,11 @@ function Navbar({ onNavigate }: NavbarProps) {
           <span />
         </button>
       </div>
+
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
     </nav>
   )
 }

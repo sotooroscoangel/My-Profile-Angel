@@ -56,10 +56,16 @@
 .navbar__resume {
   padding: 0.45rem 0.9rem;
 
+  background: none;
   border: 1px solid var(--color-border);
   border-radius: 999px;
 
   color: var(--color-text) !important;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .navbar__resume:hover {
